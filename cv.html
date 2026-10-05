@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ibrahim Hroob CV</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+@page { size: A4; margin: 13mm 14mm 12mm; }
+:root { --ink: #15201c; --muted: #4f5c57; --rule: #c9d1ce; --accent: #1f43c9; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: #fff; font: 400 9.4pt/1.42 "IBM Plex Sans", "Segoe UI", Arial, sans-serif; }
+.page { max-width: 182mm; margin: 0 auto; padding: 16px; }
+@media print { .page { padding: 0; max-width: none; } }
+a { color: var(--accent); text-decoration: none; }
+h1, h2, h3 { font-family: "Archivo", Arial, sans-serif; margin: 0; }
+header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 8px; border-bottom: 1.5pt solid var(--ink); }
+h1 { font-size: 23pt; font-weight: 900; font-stretch: 115%; letter-spacing: -0.01em; line-height: 1; }
+.title { margin-top: 5px; font: 600 10.5pt/1.3 "Archivo", Arial, sans-serif; }
+.contact { text-align: right; font-size: 8.2pt; white-space: nowrap; flex-shrink: 0; line-height: 1.5; color: var(--muted); }
+h2 { font-size: 9.2pt; font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 11px 0 5px; padding-bottom: 2px; border-bottom: 0.6pt solid var(--rule); }
+p { margin: 0; }
+ul { margin: 2px 0 0; padding-left: 13px; }
+li { margin: 1.5px 0; }
+li::marker { color: var(--muted); }
+.role { margin-top: 7px; break-inside: avoid; }
+.role-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.role-head h3 { font-size: 10pt; font-weight: 700; }
+.role-head h3 span { font-weight: 500; color: var(--muted); }
+.when { font-size: 8.6pt; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sub { font-size: 8.8pt; color: var(--muted); font-style: italic; margin-top: 1px; }
+b { font-weight: 600; }
+.highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 0.6pt solid var(--rule); margin-top: 8px; }
+.highlights div { padding: 6px 8px; }
+.highlights div + div { border-left: 0.6pt solid var(--rule); }
+.highlights strong { display: block; font: 800 13pt/1.1 "Archivo", Arial, sans-serif; font-stretch: 108%; color: var(--accent); }
+.highlights span { font-size: 7.9pt; color: var(--muted); line-height: 1.3; display: block; }
+.skills { display: grid; grid-template-columns: 30mm 1fr; gap: 2px 10px; font-size: 9pt; }
+.skills dt { font-weight: 600; }
+.skills dd { margin: 0; }
+.pubs li { margin: 3px 0; }
+.pubs .v { font-weight: 600; }
+.me { font-weight: 600; text-decoration: underline; text-underline-offset: 1.5px; }
+.pkg { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 8.5pt; }
+.pagebreak { break-before: page; }
+.foot { margin-top: 10px; font-size: 8pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>Dr Ibrahim Hroob</h1>
+    <p class="title">Head of Autonomy · LiDAR-Inertial Odometry, SLAM &amp; Robot Navigation</p>
+  </div>
+  <div class="contact">
+    Lincoln, UK · 07397 047085<br>
+    <a href="mailto:ibrahim.hroub7@gmail.com">ibrahim.hroub7@gmail.com</a><br>
+    <a href="https://ibrahimhroob.github.io">ibrahimhroob.github.io</a><br><a href="https://github.com/ibrahimhroob">github.com/ibrahimhroob</a><br>
+    <a href="https://www.linkedin.com/in/ibrahim-hroob/">linkedin.com/in/ibrahim-hroob</a><br><a href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar profile</a>
+  </div>
+</header>
+
+<h2>Profile</h2>
+<p>Robotics engineer and technical lead with a PhD in long-term LiDAR localization and 6+ years building autonomy for robots that work without reliable GPS. I designed and wrote, on my own, a production LiDAR-inertial odometry system (GTSAM factor graph, C++17). I also lead the ROS&nbsp;2 navigation stack it runs in, deployed across three robot platforms in agricultural field trials. Five first-author papers (IEEE RA-L, Robotics and Autonomous Systems, ECMR, IAS, TAROS). Looking for senior, staff or lead roles in localization, SLAM and autonomy.</p>
+
+<div class="highlights">
+  <div><strong>7.9 cm</strong><span>LIO RMSE over 4,800 field scans, 3× real-time</span></div>
+  <div><strong>8</strong><span>production ROS&nbsp;2 packages authored or led</span></div>
+  <div><strong>3</strong><span>robot platforms on one stack, real and sim</span></div>
+  <div><strong>160+</strong><span>citations · h-index 7 · 5 first-author papers</span></div>
+</div>
+
+<h2>Experience</h2>
+
+<div class="role">
+  <div class="role-head"><h3>Head of Autonomy <span>· JABAS.AI (University of Lincoln / Ceres Agri-Tech spin-out), Lincoln</span></h3><span class="when">2025 – Present</span></div>
+  <p class="sub">Technical owner of localization and navigation for a GPS-free autonomy-as-a-service platform for agricultural robot fleets.</p>
+  <ul>
+    <li><b>Built <span class="pkg">jabas_lio</span> from scratch</b>, a tightly coupled LiDAR-inertial odometry system: GTSAM fixed-lag smoother (iSAM2), IMU preintegration with bias feedback, per-point deskewing, voxel map with incremental normals, and point-to-plane matching. Reached <b>7.9 cm RMSE over 4,800 field scans</b>, <b>8.3 mm stationary error</b>, and <b>30–65 ms per frame</b> against a 100 ms budget.</li>
+    <li>Designed <b>custom GTSAM factors</b> for wheel-odometry and command-velocity priors. Their weights adapt to LiDAR observability, which keeps odometry stable in degenerate crop-row and tunnel geometry. Profile tuning <b>cut CPU 21%</b> for +5 mm RMSE.</li>
+    <li>Wrote <span class="pkg">nav2_costmap_row_controller</span>, a Nav2 plugin for Ackermann in-row driving. It detects boundaries from the costmap or point cloud, infers corridor width on its own, and keeps exact path distance even when localization degrades. Validated over 18 runs and 6,338 control cycles in a deterministic harness, with CI.</li>
+    <li>Backported Nav2's latest <b>MPPI controller</b> and added a <b>four-wheel-steering motion model</b> with tests. Built a web "Control Room" for live telemetry and on-robot critic tuning.</li>
+    <li>Architected <span class="pkg">navstack_bringup</span>: one codebase covering GNSS/EKF fusion, LIO, point-cloud preprocessing, Nav2, topological navigation and safety guards. It runs on <b>AgileX Hunter, Dynium Gophar and Dogtooth</b>, real and simulated, with Docker devcontainers.</li>
+    <li>Wrote <span class="pkg">autonomy_metrics_logger</span>, which tracks autonomous distance, interventions and MDBI in MongoDB. It is the billing source of truth and survives database outages. Also wrote a <b>Livox Mid-360 Gazebo Harmonic plugin</b> and composable point-cloud filters (Patchwork++).</li>
+    <li>Core contributor to LCAS <span class="pkg">topological_navigation</span> (open source): ROS&nbsp;2 port, route-segment metric maps, occupancy-grid publishing, and parameter-setting edge actions.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><h3>Robotics Software Engineer <span>· University of Lincoln (Lincoln Centre for Autonomous Systems)</span></h3><span class="when">May 2024 – 2025</span></div>
+  <ul>
+    <li>Designed a navigation-agnostic ROS&nbsp;2 autonomy stack with stable interfaces, so planners and controllers can be swapped without changing upstream applications.</li>
+    <li>Built a Kalman-filter pole tracker that holds landmark tracks through occlusion. Its output gives polytunnel row boundaries for in-row planning and stabilises localization without GPS.</li>
+    <li>Set up systematic log- and replay-based validation for mapping and localization, and fixed drift, TF and integration faults on physical robots.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><h3>Research Assistant, Robot Autonomy <span>· University of Lincoln</span></h3><span class="when">Jul 2023 – Dec 2023</span></div>
+  <ul><li>Brought robots up on ROS&nbsp;2: ros2_control, URDF, sensor and actuator drivers, and simulation parity packages.</li></ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><h3>Embedded Systems Engineer <span>· Dicam Technology, Halesworth</span></h3><span class="when">Sep 2019 – Sep 2021</span></div>
+  <ul><li>Real-time firmware and Modbus monitoring and control networks for farm automation. Wrote UART, I²C and SPI drivers, Bluetooth, and remote firmware update.</li></ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><h3>KTP Associate <span>· University of Essex with industry partner</span></h3><span class="when">Jan 2018 – Sep 2019</span></div>
+  <ul><li>Embedded control systems for agriculture with over-the-air programming and fuzzy control algorithms.</li></ul>
+</div>
+
+<h2>Research: First-Author Publications</h2>
+<ul class="pubs">
+  <li><span class="me">I. Hroob</span>, B. Mersch, C. Stachniss, M. Hanheide. <b>Generalizable Stable Points Segmentation for 3D LiDAR Scan-to-Map Long-Term Localization.</b> <span class="v">IEEE Robotics and Automation Letters</span>, 9(4), 2024. With the University of Bonn. <a href="https://github.com/ibrahimhroob/SPS">Code</a></li>
+  <li><span class="me">I. Hroob</span>, S. Molina, R. Polvara, G. Cielniak, M. Hanheide. <b>Adaptive Robot Localization in Dynamic Environments through Self-Learnt Long-Term 3D Stable Points Segmentation.</b> <span class="v">Robotics and Autonomous Systems</span>, 181, 2024.</li>
+  <li><span class="me">I. Hroob</span> et al. <b>Learned Long-Term Stability Scan Filtering for Robust Robot Localisation in Continuously Changing Environments.</b> <span class="v">ECMR</span>, 2023. <a href="https://github.com/ibrahimhroob/lts_filter">Code</a></li>
+  <li><span class="me">I. Hroob</span> et al. <b>LTS-NET: End-to-End Unsupervised Learning of Long-Term 3D Stable Objects.</b> <span class="v">Intelligent Autonomous Systems (IAS-18)</span>, 2023.</li>
+  <li><span class="me">I. Hroob</span> et al. <b>Benchmark of Visual and 3D LiDAR SLAM Systems in Simulation Environment for Vineyards.</b> <span class="v">TAROS</span>, 2021. (39 citations)</li>
+</ul>
+<p style="margin-top:4px"><b>Selected co-authored:</b> Resilient TEB Planner (<i>J. Field Robotics</i> 2025) · Navigating Narrow Spaces for Agricultural Robots (<i>IEEE RA-L</i> 2025) · BLT Agricultural Multimodal Data Set (<i>J. Field Robotics</i> 2023) · Robotic Grape Inspection and Harvesting (<i>IEEE RAM</i> 2024).</p>
+
+<h2>Technical Skills</h2>
+<dl class="skills">
+  <dt>Estimation &amp; SLAM</dt><dd>LiDAR-inertial odometry, factor graphs (GTSAM, iSAM2), IMU preintegration, ICP/point-to-plane, Kalman filtering, GNSS/EKF fusion, scan-to-map localization, observability analysis</dd>
+  <dt>Navigation</dt><dd>Nav2 (controller and costmap plugins), MPPI, topological planning, behaviour trees, Ackermann and four-wheel-steering kinematics</dd>
+  <dt>Perception &amp; ML</dt><dd>3D point clouds (PCL), ground segmentation (Patchwork++), self-supervised point-cloud learning (PyTorch)</dd>
+  <dt>Software</dt><dd>Modern C++ (14/17), Python, ROS&nbsp;2 (Humble/Jazzy), DDS, lifecycle and composable nodes, CMake/colcon, gtest/pytest</dd>
+  <dt>Infrastructure</dt><dd>Docker and devcontainers, GitHub Actions CI, Gazebo Sim plugins, rosbag replay benchmarking, MongoDB, Linux</dd>
+  <dt>Hardware</dt><dd>Livox Mid-360 and 3D LiDARs, IMUs, RTK GNSS, CAN, Modbus, microcontroller firmware</dd>
+</dl>
+
+<h2>Education</h2>
+<div class="role" style="margin-top:3px">
+  <div class="role-head"><h3>PhD, Computer Science (Mobile Robotics) <span>· University of Lincoln</span></h3><span class="when">Nov 2020 – Mar 2024</span></div>
+  <p class="sub">Learning-based long-term localization in dynamic environments. EU H2020 BACCHUS project.</p>
+</div>
+<div class="role" style="margin-top:5px">
+  <div class="role-head"><h3>MSc, Embedded Systems (Distinction) <span>· University of Essex</span></h3><span class="when">2016 – 2017</span></div>
+</div>
+<div class="role" style="margin-top:5px">
+  <div class="role-head"><h3>BEng, Mechatronics (First-Class Honours) <span>· Palestine Polytechnic University</span></h3><span class="when">2009 – 2014</span></div>
+</div>
+
+</div>
+</body>
+</html>

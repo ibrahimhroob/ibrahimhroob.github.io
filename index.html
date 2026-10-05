@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ibrahim Hroob</title>
+<meta name="description" content="Dr Ibrahim Hroob, Head of Autonomy at JABAS.AI. LiDAR-inertial odometry, long-term localization and field navigation for GPS-denied robots.">
+<meta property="og:title" content="Dr Ibrahim Hroob, Head of Autonomy">
+<meta property="og:description" content="LiDAR-inertial odometry, long-term localization and production ROS 2 autonomy for robots that work where GPS doesn't.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a survey-sheet page. Narrow reading column, hero with a top-down
+   polytunnel scan, then a ledger of packages and papers keyed by frame/venue. */
+:root {
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --ink: #15201c;
+  --muted: #56645f;
+  --rule: #d5dcd9;
+  --accent: #1f43c9;
+  --accent-soft: #e4e9fb;
+  --scan: #c77d00;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2.3rem, 6vw, 3.6rem);
+  --measure: 66ch;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1412; --surface: #151d1a; --ink: #e2e9e6; --muted: #98a6a1;
+    --rule: #26322e; --accent: #8aa2ff; --accent-soft: #1c2647; --scan: #f0a62a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1412; --surface: #151d1a; --ink: #e2e9e6; --muted: #98a6a1;
+  --rule: #26322e; --accent: #8aa2ff; --accent-soft: #1c2647; --scan: #f0a62a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 var(--step-0)/1.6 var(--font-body);
+  padding-inline: 16px;
+}
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h2 { font-size: var(--step-2); font-weight: 800; font-stretch: 112%; letter-spacing: -0.01em; }
+h3 { font-size: var(--step-1); font-weight: 700; font-stretch: 100%; }
+p { margin: 0; }
+.label { font: 500 var(--step--1)/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--font-mono); font-size: 0.92em; }
+
+/* top bar */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 20px; border-bottom: 1px solid var(--rule); }
+.top nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: var(--step--1); }
+.top nav a { color: var(--ink); text-decoration: none; }
+.top nav a:hover { color: var(--accent); }
+.mark { font: 800 1rem/1 var(--font-display); font-stretch: 125%; letter-spacing: 0.02em; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 56px 40px; }
+.hero h1 { font-size: var(--step-3); line-height: 1.02; font-weight: 900; font-stretch: 118%; letter-spacing: -0.02em; }
+.hero .role { margin-top: 14px; font: 600 var(--step-1)/1.35 var(--font-display); font-stretch: 95%; }
+.hero .role a { color: inherit; }
+.hero .lede { margin-top: 18px; max-width: 54ch; color: var(--muted); }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 3px; }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn:hover { border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.scan { position: relative; border: 1px solid var(--rule); background: var(--surface); border-radius: 4px; }
+.scan canvas { display: block; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; }
+.scan figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 12px; border-top: 1px solid var(--rule); font: 400 0.75rem/1.4 var(--font-mono); color: var(--muted); }
+
+/* facts strip */
+.facts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-block: 1px solid var(--rule); }
+.facts div { padding: 18px 16px; display: grid; gap: 2px; }
+.facts div + div { border-left: 1px solid var(--rule); }
+.facts b { font: 800 1.7rem/1.1 var(--font-display); font-stretch: 110%; font-variant-numeric: tabular-nums; }
+.facts span { font-size: var(--step--1); color: var(--muted); line-height: 1.35; }
+
+section { padding-block: 64px 8px; }
+.sec-head { display: grid; gap: 8px; margin-bottom: 28px; max-width: var(--measure); }
+.sec-head p { color: var(--muted); }
+
+/* strengths */
+.strengths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.strengths article { display: grid; gap: 10px; align-content: start; padding-top: 14px; border-top: 2px solid var(--ink); }
+.strengths p { color: var(--muted); font-size: 0.95rem; }
+.strengths ul { margin: 0; padding-left: 1.1em; font-size: 0.92rem; display: grid; gap: 4px; }
+
+/* lio feature */
+.feature { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 28px; display: grid; gap: 22px; }
+.feature-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.feature-head h3 { font-size: var(--step-2); font-weight: 800; font-stretch: 110%; }
+.tag { font: 500 0.72rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 8px; border-radius: 2px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.tag.alt { background: transparent; border: 1px solid var(--rule); color: var(--muted); }
+.feature-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; }
+.feature-body > div { min-width: 0; display: grid; gap: 14px; align-content: start; }
+.feature ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.95rem; }
+.metrics { display: grid; gap: 0; align-self: start; border: 1px solid var(--rule); border-radius: 3px; }
+.metrics div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 12px; padding: 10px 14px; align-items: baseline; }
+.metrics div + div { border-top: 1px solid var(--rule); }
+.metrics b { font: 700 1.15rem/1.2 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--accent); }
+.metrics span { font-size: 0.88rem; color: var(--muted); line-height: 1.4; }
+.pipeline { overflow-x: auto; border-top: 1px solid var(--rule); padding-top: 18px; }
+.pipeline svg { display: block; min-width: 760px; width: 100%; height: auto; }
+.note { font-size: var(--step--1); color: var(--muted); }
+
+/* packages ledger */
+.ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.pkg { display: grid; gap: 8px; align-content: start; padding: 22px 24px 22px 0; border-bottom: 1px solid var(--rule); }
+.pkg:nth-child(even) { padding-left: 24px; padding-right: 0; border-left: 1px solid var(--rule); }
+.pkg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.pkg h3 { font: 600 1.02rem/1.3 var(--font-mono); word-break: break-word; }
+.pkg p { font-size: 0.93rem; color: var(--muted); }
+.stack { font: 400 0.75rem/1.4 var(--font-mono); color: var(--muted); }
+
+/* papers */
+.papers { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.paper { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 24px; padding-block: 22px; border-bottom: 1px solid var(--rule); }
+.paper .venue { display: grid; gap: 4px; align-content: start; }
+.paper .venue b { font: 800 1.05rem/1.2 var(--font-display); font-stretch: 105%; }
+.paper .venue span { font: 400 0.78rem/1.35 var(--font-mono); color: var(--muted); }
+.paper .body { display: grid; gap: 6px; min-width: 0; }
+.paper h3 { font: 600 1.08rem/1.35 var(--font-body); }
+.paper .authors { font-size: 0.88rem; color: var(--muted); }
+.paper .authors u { text-decoration: none; color: var(--ink); font-weight: 600; }
+.paper .summary { font-size: 0.93rem; max-width: var(--measure); }
+.links { display: flex; gap: 14px; flex-wrap: wrap; font: 500 0.8rem/1.4 var(--font-mono); }
+.co { margin-top: 28px; display: grid; gap: 10px; }
+.co ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.co li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 24px; font-size: 0.92rem; }
+.co li span:first-child { font: 400 0.78rem/1.6 var(--font-mono); color: var(--muted); }
+
+/* timeline */
+.timeline { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.job { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 24px; padding-block: 20px; border-bottom: 1px solid var(--rule); }
+.job .when { font: 400 0.8rem/1.5 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.job .body { display: grid; gap: 6px; min-width: 0; }
+.job h3 { font-size: 1.08rem; font-weight: 700; font-stretch: 100%; }
+.job h3 small { font: 400 0.92rem var(--font-body); color: var(--muted); }
+.job p, .job ul { font-size: 0.93rem; color: var(--muted); }
+.job ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; }
+
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; padding-block: 64px; }
+.contact dl { margin: 0; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 10px 16px; font-size: 0.95rem; }
+.contact dt { font: 500 0.78rem/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.contact dd { margin: 0; word-break: break-word; }
+footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size: var(--step--1); color: var(--muted); }
+
+@media (max-width: 880px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 36px 28px; gap: 28px; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .facts div:nth-child(4) { border-left: 0; }
+  .facts div:nth-child(n+4) { border-top: 1px solid var(--rule); }
+  .strengths { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .feature-body { grid-template-columns: minmax(0, 1fr); }
+  .ledger { grid-template-columns: minmax(0, 1fr); }
+  .pkg, .pkg:nth-child(even) { padding: 20px 0; border-left: 0; }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(n) { border-left: 0; border-top: 1px solid var(--rule); }
+  .facts div:nth-child(even) { border-left: 1px solid var(--rule); }
+  .facts div:nth-child(-n+2) { border-top: 0; }
+  .paper, .job, .co li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .feature { padding: 20px; }
+  .metrics div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .contact dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .contact dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media print { .top nav, .cta, .scan { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="mark">IBRAHIM HROOB</span>
+  <nav aria-label="Sections">
+    <a href="#work">Production work</a>
+    <a href="#research">Research</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="name" style="padding-top:56px">
+  <div>
+    <p class="label">Localization · SLAM · Field autonomy</p>
+    <h1 id="name" style="margin-top:12px">Dr Ibrahim Hroob</h1>
+    <p class="role">Head of Autonomy at <a href="https://jabas.ai/">JABAS.AI</a></p>
+    <p class="lede">I build the estimation and navigation software that lets robots work where GPS doesn't: under canopy, inside polytunnels, between crop rows. I wrote a tightly coupled LiDAR-inertial odometry system from scratch and lead the ROS&nbsp;2 autonomy stack it runs in. That stack runs on three robot platforms. My PhD and first-author papers in RA-L and RAS are on long-term 3D LiDAR localization in changing environments.</p>
+    <div class="cta">
+      <a class="btn primary" href="cv.pdf">Download CV (PDF)</a>
+      <a class="btn" href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar</a>
+      <a class="btn" href="https://github.com/ibrahimhroob">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/ibrahim-hroob/">LinkedIn</a>
+    </div>
+  </div>
+  <figure class="scan" style="margin:0">
+    <canvas id="scan" width="800" height="600" aria-label="Top-down LiDAR view of a polytunnel with a robot trajectory running up and down the rows"></canvas>
+    <figcaption><span>frame: map · top-down · 1 cell = 1 m</span><span id="pose">x 0.00 y 0.00 θ 90.0°</span></figcaption>
+  </figure>
+</section>
+
+<div class="facts" role="list">
+  <div role="listitem"><b>5</b><span>first-author papers (RA-L, RAS, ECMR, IAS, TAROS)</span></div>
+  <div role="listitem"><b>160+</b><span>citations · h-index 7</span></div>
+  <div role="listitem"><b>3</b><span>robot platforms running my navigation stack</span></div>
+  <div role="listitem"><b>7.9&nbsp;cm</b><span>LIO position RMSE over 4,800 field scans</span></div>
+  <div role="listitem"><b>8</b><span>ROS&nbsp;2 packages authored or led in production</span></div>
+</div>
+
+<section aria-labelledby="strengths-h">
+  <div class="sec-head">
+    <p class="label">What I'm hired for</p>
+    <h2 id="strengths-h">I own robot autonomy from sensor timestamp to farm deployment</h2>
+  </div>
+  <div class="strengths">
+    <article>
+      <h3>State estimation &amp; SLAM</h3>
+      <p>Factor-graph LiDAR-inertial odometry, IMU preintegration, scan matching, sensor fusion, and long-term localization against maps that change between visits.</p>
+      <ul><li>GTSAM, iSAM2, fixed-lag smoothing</li><li>Custom factors and observability analysis</li><li>Learned point-stability filters (PyTorch)</li></ul>
+    </article>
+    <article>
+      <h3>Production ROS&nbsp;2 autonomy</h3>
+      <p>Nav2 controller plugins, MPPI, topological route planning, launch orchestration, and safety and metrics tooling for robots in daily commercial use.</p>
+      <ul><li>Modern C++17, Python</li><li>Nav2, behaviour trees, lifecycle nodes, DDS</li><li>Docker, CI, replay benchmarks, gtest</li></ul>
+    </article>
+    <article>
+      <h3>Research to field</h3>
+      <p>I take a method from paper to a robot that runs all day. I measure it on real logs and keep the benchmark honest about coverage, CPU and failure modes.</p>
+      <ul><li>Reproducible bag-replay evaluation</li><li>Sim-to-real: custom Gazebo sensor plugins</li><li>Debugging drift and frame issues on hardware</li></ul>
+    </article>
+  </div>
+</section>
+
+<section id="work" aria-labelledby="work-h">
+  <div class="sec-head">
+    <p class="label">Production work · JABAS.AI navigation stack</p>
+    <h2 id="work-h">A GPS-free navigation stack for agricultural robot fleets</h2>
+    <p>JABAS.AI spun out of the University of Lincoln and Ceres Agri-Tech in 2026 to provide autonomy-as-a-service for farm robots. The stack runs on the AgileX Hunter, Dynium Gophar and Dogtooth platforms, in simulation and on hardware, from one codebase.</p>
+  </div>
+
+  <article class="feature" aria-labelledby="lio-h">
+    <div class="feature-head">
+      <h3 id="lio-h" class="mono" style="font-family:var(--font-mono);font-size:1.4rem">jabas_lio</h3>
+      <span class="tag">Sole author · written from scratch</span>
+    </div>
+    <div class="feature-body">
+      <div>
+        <p>Tightly coupled LiDAR-inertial odometry for ROS&nbsp;2. A sliding-window factor graph fuses 200&nbsp;Hz IMU with 10&nbsp;Hz Livox Mid-360 scans and estimates pose, velocity and IMU bias jointly. It was built for crop rows and tunnels, where the geometry is repetitive and scan matching alone degenerates.</p>
+        <ul>
+          <li>GTSAM <span class="mono">IncrementalFixedLagSmoother</span> (iSAM2) with <span class="mono">CombinedImuFactor</span> and bias feedback into preintegration</li>
+          <li>Per-point IMU deskewing, voxel map with incremental PCA normals, robust point-to-plane matching</li>
+          <li>Custom GTSAM factors for wheel-odometry and command-velocity motion priors. Their weights adapt to LiDAR observability.</li>
+          <li>Frame-health gating, stationary locking, published covariances, and a GPS fusion node</li>
+          <li>Synthetic LiDAR/IMU generator for hardware-free tests; replay and benchmark tooling</li>
+        </ul>
+        <p class="stack">C++17 · Python · GTSAM · Eigen · ROS&nbsp;2 · ~9.6k lines · 12 test suites</p>
+      </div>
+      <div class="metrics" aria-label="Validation results">
+        <div><b>7.9 cm</b><span>aligned position RMSE over 4,800 field scans (8 min), GPS used only as reference</span></div>
+        <div><b>8.3 mm</b><span>max error while stationary over 20 s, with zero false path length</span></div>
+        <div><b>30–65 ms</b><span>per-frame cost inside a 100 ms budget, so it holds 3× real-time replay</span></div>
+        <div><b>−21%</b><span>CPU from profile tuning for +5 mm RMSE, measured over the full bag</span></div>
+      </div>
+    </div>
+    <div class="pipeline" aria-label="Estimator pipeline">
+      <svg viewBox="0 0 980 150" role="img" aria-labelledby="pipe-t">
+        <title id="pipe-t">jabas_lio pipeline: IMU and LiDAR are deskewed, matched against a voxel map, and fused in a fixed-lag factor graph that outputs odometry and feeds bias back to preintegration</title>
+        <defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker></defs>
+        <g font-family="JetBrains Mono, monospace" font-size="12" fill="var(--ink)">
+          <g fill="var(--surface)" stroke="var(--rule)">
+            <rect x="4" y="18" width="118" height="38" rx="2"/>
+            <rect x="4" y="92" width="118" height="38" rx="2"/>
+            <rect x="166" y="18" width="128" height="38" rx="2"/>
+            <rect x="166" y="92" width="128" height="38" rx="2"/>
+            <rect x="338" y="92" width="128" height="38" rx="2"/>
+            <rect x="510" y="55" width="160" height="38" rx="2" stroke="var(--accent)"/>
+            <rect x="714" y="55" width="118" height="38" rx="2"/>
+            <rect x="866" y="55" width="110" height="38" rx="2"/>
+          </g>
+          <text x="63" y="41" text-anchor="middle">IMU 200 Hz</text>
+          <text x="63" y="115" text-anchor="middle">LiDAR 10 Hz</text>
+          <text x="230" y="41" text-anchor="middle">preintegrate</text>
+          <text x="230" y="115" text-anchor="middle">deskew + voxel</text>
+          <text x="402" y="115" text-anchor="middle">point-to-plane</text>
+          <text x="590" y="78" text-anchor="middle" fill="var(--accent)">fixed-lag iSAM2</text>
+          <text x="773" y="78" text-anchor="middle">voxel map</text>
+          <text x="921" y="78" text-anchor="middle">/lio/odom</text>
+        </g>
+        <g stroke="var(--muted)" stroke-width="1.3" fill="none" marker-end="url(#ah)">
+          <path d="M122 37 H164"/>
+          <path d="M122 111 H164"/>
+          <path d="M294 111 H336"/>
+          <path d="M294 37 H490 Q500 37 500 47 V64 H508"/>
+          <path d="M466 111 H490 Q500 111 500 101 V84 H508"/>
+          <path d="M670 74 H712"/>
+          <path d="M832 74 H864"/>
+          <path d="M590 55 V8 H230 V16" stroke-dasharray="4 3"/>
+          <path d="M773 93 V142 H402 V132" stroke-dasharray="4 3"/>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--muted)">
+          <text x="598" y="34">bias feedback</text>
+          <text x="560" y="140">map correspondences</text>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <div class="ledger" style="margin-top:28px">
+    <article class="pkg">
+      <div class="pkg-head"><h3>nav2_costmap_row_controller</h3><span class="tag">Author</span></div>
+      <p>A Nav2 controller plugin for Ackermann robots in polytunnel rows. It finds the row boundaries in the costmap or point cloud, infers corridor width on its own, and keeps going when it can only see one side. It travels the exact planned distance even when localization drifts. I validated it with a deterministic harness that ran the real Nav2 costmap code: 18 runs and 6,338 control cycles.</p>
+      <p class="stack">C++ · Nav2 plugin API · costmap_2d · GitHub Actions CI</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>nav2_mppi_controller</h3><span class="tag">Lead</span></div>
+      <p>I backported Nav2's latest MPPI controller into the stack and added a four-wheel-steering motion model for the Gophar platform, with tests. I also built "MPPI Control Room", a web UI for live telemetry, velocity monitoring and critic tuning on the robot.</p>
+      <p class="stack">C++ · xtensor · MPPI · JavaScript</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>navstack_bringup</h3><span class="tag">Author</span></div>
+      <p>Launch and orchestration for the whole stack. It covers GNSS, LIO, point-cloud preprocessing, Nav2, EKF/NavSat fusion, topological navigation, metrics and command safety guards. One codebase handles three platforms on both real hardware and Gazebo, with per-platform Docker devcontainers.</p>
+      <p class="stack">Python launch · Docker · robot_localization · tmule</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>topological_navigation</h3><span class="tag alt">Core contributor</span></div>
+      <p>Contributor to <a href="https://github.com/LCAS/topological_navigation">LCAS's open-source topological planner</a>, which has 1,700+ commits. I worked on the ROS&nbsp;2 port and added per-route-segment metric maps and occupancy-grid publishing. Edge actions can now set ROS&nbsp;2 parameters on any node, and I wrote topomap editing and image-export tools.</p>
+      <p class="stack">Python · ROS&nbsp;2 actions · Nav2</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>autonomy_metrics_logger</h3><span class="tag">Author</span></div>
+      <p>Tracks autonomous and manual distance, interventions and collisions, and logs each event to MongoDB with a full system snapshot. It reports mean distance between interventions (MDBI) and is the source of truth for distance-based billing. If MongoDB goes down, the node keeps running and reconnects in the background.</p>
+      <p class="stack">Python · MongoDB · YAML-driven config</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>pointcloud_processing</h3><span class="tag">Author</span></div>
+      <p>Reusable composable nodes for LiDAR preprocessing: transform, crop-box, voxel downsampling, and Patchwork++ ground and outlier removal. They feed both the costmaps and the row controller.</p>
+      <p class="stack">C++ · PCL · rclcpp_components · Patchwork++</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>livox_mid360_gz</h3><span class="tag">Author</span></div>
+      <p>A Gazebo Harmonic system plugin that reproduces the Livox Mid-360's non-repetitive scan pattern on a GPU lidar backend. It keeps simulated sensor data close enough to the real sensor for LIO and controller testing.</p>
+      <p class="stack">C++ · Gazebo Sim · ROS&nbsp;2 Jazzy</p>
+    </article>
+    <article class="pkg">
+      <div class="pkg-head"><h3>Kalman pole tracker</h3><span class="tag">Author</span></div>
+      <p>Tracks polytunnel poles through occlusion and noisy detections. The tracks give row boundaries for in-row planning and stabilise localization where GPS is unavailable.</p>
+      <p class="stack">C++ · Kalman filtering · data association</p>
+    </article>
+  </div>
+</section>
+
+<section id="research" aria-labelledby="research-h">
+  <div class="sec-head">
+    <p class="label">Research · first author</p>
+    <h2 id="research-h">Which parts of a changing world can a robot trust?</h2>
+    <p>My PhD asked which LiDAR points stay stable over weeks and seasons, and how to learn that without manual labels. The result is a family of self-supervised point-stability filters that make scan-to-map localization robust in dynamic environments.</p>
+  </div>
+  <div class="papers">
+    <article class="paper">
+      <div class="venue"><b>IEEE RA-L</b><span>2024 · vol 9(4)</span></div>
+      <div class="body">
+        <h3>Generalizable Stable Points Segmentation for 3D LiDAR Scan-to-Map Long-Term Localization</h3>
+        <p class="authors"><u>I. Hroob</u>, B. Mersch, C. Stachniss, M. Hanheide</p>
+        <p class="summary">Learns per-point stability from 3D LiDAR alone and generalizes across environments, improving long-term scan-to-map localization. Joint work with Cyrill Stachniss's lab at the University of Bonn.</p>
+        <div class="links"><a href="https://doi.org/10.1109/LRA.2024.3368236">DOI</a><a href="https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/hroob2024ral.pdf">PDF</a><a href="https://github.com/ibrahimhroob/SPS">Code</a><a href="https://www.youtube.com/watch?v=aRLStFQEXbc">Video</a></div>
+      </div>
+    </article>
+    <article class="paper">
+      <div class="venue"><b>Robotics and Autonomous Systems</b><span>2024 · vol 181</span></div>
+      <div class="body">
+        <h3>Adaptive Robot Localization in Dynamic Environments through Self-Learnt Long-Term 3D Stable Points Segmentation</h3>
+        <p class="authors"><u>I. Hroob</u>, S. Molina, R. Polvara, G. Cielniak, M. Hanheide</p>
+        <p class="summary">Unsupervised spatio-temporal labelling plus a stability regression network. Using only long-term stable points gives more reliable localization on long missions than using the full scan.</p>
+        <div class="links"><a href="https://doi.org/10.1016/j.robot.2024.104786">DOI</a><a href="https://github.com/ibrahimhroob/auto_labeling">Labelling code</a></div>
+      </div>
+    </article>
+    <article class="paper">
+      <div class="venue"><b>ECMR</b><span>2023 · Coimbra</span></div>
+      <div class="body">
+        <h3>Learned Long-Term Stability Scan Filtering for Robust Robot Localisation in Continuously Changing Environments</h3>
+        <p class="authors"><u>I. Hroob</u>, S. Molina, R. Polvara, G. Cielniak, M. Hanheide</p>
+        <p class="summary">A stability scan filter for agricultural fields. It drops points that will not persist before they reach localization.</p>
+        <div class="links"><a href="https://ieeexplore.ieee.org/document/10256419">IEEE</a><a href="https://github.com/ibrahimhroob/lts_filter">Code</a><a href="https://zenodo.org/records/10554901">Zenodo</a></div>
+      </div>
+    </article>
+    <article class="paper">
+      <div class="venue"><b>IAS-18</b><span>2023 · Suwon</span></div>
+      <div class="body">
+        <h3>LTS-NET: End-to-End Unsupervised Learning of Long-Term 3D Stable Objects</h3>
+        <p class="authors"><u>I. Hroob</u>, S. Molina, R. Polvara, G. Cielniak, M. Hanheide</p>
+        <p class="summary">Learns continuous point-wise stability labels from historical scans. It beats direct static-versus-dynamic classification on NCLT.</p>
+        <div class="links"><a href="https://doi.org/10.1007/978-3-031-44981-9_2">DOI</a><a href="https://arxiv.org/abs/2301.03426">arXiv</a></div>
+      </div>
+    </article>
+    <article class="paper">
+      <div class="venue"><b>TAROS</b><span>2021 · 39 citations</span></div>
+      <div class="body">
+        <h3>Benchmark of Visual and 3D LiDAR SLAM Systems in Simulation Environment for Vineyards</h3>
+        <p class="authors"><u>I. Hroob</u>, R. Polvara, S. Molina, G. Cielniak, M. Hanheide</p>
+        <p class="summary">Compares LIO-SAM, StaticMapping, ORB-SLAM2 and RTAB-Map across four vineyard scenarios with repetitive structure and uneven terrain.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2107.05283">arXiv</a></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="co">
+    <p class="label">Selected co-authored work</p>
+    <ul>
+      <li><span>J. Field Robotics 2025</span><span>Resilient Timed Elastic Band Planner for Collision-Free Navigation in Unknown Environments</span></li>
+      <li><span>IEEE RA-L 2025</span><span>Navigating Narrow Spaces: A Comprehensive Framework for Agricultural Robots</span></li>
+      <li><span>J. Field Robotics 2023</span><span>Bacchus Long-Term (BLT) Data Set: Acquisition of the Agricultural Multimodal BLT Data Set with Automated Robot Deployment</span></li>
+      <li><span>IEEE RAM 2024</span><span>Robotic Grape Inspection and Selective Harvesting in Vineyards: A Multisensory Robotic System with Advanced Cognitive Capabilities</span></li>
+    </ul>
+    <p class="note">Full list and live citation counts on <a href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar</a>. Counts on this page as of October 2026.</p>
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="exp-h">
+  <div class="sec-head">
+    <p class="label">Experience</p>
+    <h2 id="exp-h">Embedded systems, then a PhD, then field autonomy</h2>
+  </div>
+  <div class="timeline">
+    <article class="job">
+      <p class="when">2025 – now</p>
+      <div class="body">
+        <h3>Head of Autonomy <small>· JABAS.AI, Lincoln</small></h3>
+        <p>Technical lead for localization and navigation at a University of Lincoln and Ceres Agri-Tech spin-out. I own the LIO, the controllers and the stack architecture, and support on-farm trials with commercial growers.</p>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">2024 – 2025</p>
+      <div class="body">
+        <h3>Robotics Software Engineer <small>· University of Lincoln (LCAS)</small></h3>
+        <p>Designed a navigation-agnostic ROS&nbsp;2 autonomy stack, LiDAR localization for GPS-denied farms, and a Kalman-filter pole tracker for in-row boundary estimation.</p>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">2023</p>
+      <div class="body">
+        <h3>Research Assistant, Robot Autonomy <small>· University of Lincoln</small></h3>
+        <p>Brought robots up on ROS&nbsp;2: ros2_control, URDF, and sensor and actuator integration for real and simulated platforms.</p>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">2020 – 2024</p>
+      <div class="body">
+        <h3>PhD, Computer Science (Mobile Robotics) <small>· University of Lincoln</small></h3>
+        <p>Learning-based long-term localization in dynamic environments. Part of the EU H2020 BACCHUS project.</p>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">2018 – 2021</p>
+      <div class="body">
+        <h3>Embedded Systems Engineer <small>· Dicam Technology</small> · KTP Associate <small>· University of Essex</small></h3>
+        <p>Real-time firmware and Modbus control networks for farm automation. Wrote UART, I²C and SPI drivers, Bluetooth links, over-the-air updates, and fuzzy control.</p>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">Education</p>
+      <div class="body">
+        <h3>MSc Embedded Systems, Distinction <small>· University of Essex, 2017</small></h3>
+        <h3>BEng Mechatronics, First Class <small>· Palestine Polytechnic University, 2014</small></h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="contact" class="contact" aria-labelledby="contact-h">
+  <div class="sec-head" style="margin:0">
+    <p class="label">Contact</p>
+    <h2 id="contact-h">Hiring for localization, SLAM or autonomy leadership?</h2>
+    <p>I'm interested in senior and lead roles in autonomous systems where estimation quality decides whether the product works.</p>
+  </div>
+  <dl>
+    <dt>Email</dt><dd><a href="mailto:ibrahim.hroub7@gmail.com">ibrahim.hroub7@gmail.com</a></dd>
+    <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ibrahim-hroob/">in/ibrahim-hroob</a></dd>
+    <dt>GitHub</dt><dd><a href="https://github.com/ibrahimhroob">ibrahimhroob</a></dd>
+    <dt>Scholar</dt><dd><a href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar profile</a></dd>
+    <dt>Based</dt><dd>Lincoln, UK</dd>
+  </dl>
+</section>
+
+<footer>© 2026 Ibrahim Hroob</footer>
+</div>
+
+<script>
+(function () {
+  var cv = document.getElementById('scan');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var poseEl = document.getElementById('pose');
+  var W = 800, H = 600;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Seeded RNG so the scene is identical on every load.
+  var s = 7;
+  function rnd() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }
+
+  // Polytunnel: 6 leg rows, 5 corridors, metres mapped to px.
+  var scale = 36, ox = 119, oy = 520;
+  var rows = [0, 2.6, 5.2, 7.8, 10.4, 13.0, 15.6].map(function (x) { return x; });
+  var len = 12;
+  var pts = [];
+  rows.forEach(function (rx) {
+    for (var y = 0; y <= len; y += 1.0) {
+      // pole returns
+      for (var k = 0; k < 10; k++) pts.push([rx + (rnd() - 0.5) * 0.18, y + (rnd() - 0.5) * 0.18, 1]);
+    }
+    for (var j = 0; j < 120; j++) pts.push([rx + (rnd() - 0.5) * 0.9, rnd() * len, 0.45]); // canopy
+  });
+  for (var g = 0; g < 380; g++) pts.push([rnd() * 15.6, rnd() * len, 0.18]); // ground clutter
+
+  // Boustrophedon path through corridors.
+  var path = [];
+  for (var c = 0; c < rows.length - 1; c++) {
+    var cx = (rows[c] + rows[c + 1]) / 2;
+    var up = c % 2 === 0;
+    for (var t = 0; t <= 1.0001; t += 0.025) {
+      var y = up ? 0.8 + t * (len - 1.6) : (len - 0.8) - t * (len - 1.6);
+      path.push([cx + Math.sin(t * 9 + c) * 0.06, y]);
+    }
+    if (c < rows.length - 2) {
+      var nx = (rows[c + 1] + rows[c + 2]) / 2, ey = up ? len - 0.8 : 0.8;
+      for (var a = 0.1; a < Math.PI; a += 0.15) {
+        path.push([cx + (nx - cx) * (1 - Math.cos(a)) / 2, ey + (up ? 1 : -1) * Math.sin(a) * 0.9]);
+      }
+    }
+  }
+
+  function P(p) { return [ox + p[0] * scale, oy - p[1] * scale]; }
+  var col = {};
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement);
+    ['--surface', '--ink', '--muted', '--rule', '--accent', '--scan'].forEach(function (k) { col[k] = cs.getPropertyValue(k).trim(); });
+  }
+
+  function draw(upto) {
+    ctx.fillStyle = col['--surface']; ctx.fillRect(0, 0, W, H);
+    // 1 m grid
+    ctx.strokeStyle = col['--rule']; ctx.lineWidth = 1; ctx.globalAlpha = 0.6;
+    for (var gx = -4; gx <= 20; gx++) { ctx.beginPath(); ctx.moveTo(ox + gx * scale, 0); ctx.lineTo(ox + gx * scale, H); ctx.stroke(); }
+    for (var gy = -3; gy <= 15; gy++) { ctx.beginPath(); ctx.moveTo(0, oy - gy * scale); ctx.lineTo(W, oy - gy * scale); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+    // points
+    ctx.fillStyle = col['--scan'];
+    pts.forEach(function (p) {
+      var q = P(p); ctx.globalAlpha = p[2]; ctx.fillRect(q[0] - 1.2, q[1] - 1.2, 2.4, 2.4);
+    });
+    ctx.globalAlpha = 1;
+    // planned path (faint)
+    ctx.strokeStyle = col['--muted']; ctx.setLineDash([4, 5]); ctx.lineWidth = 1.2; ctx.beginPath();
+    path.forEach(function (p, i) { var q = P(p); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); });
+    ctx.stroke(); ctx.setLineDash([]);
+    // travelled path
+    ctx.strokeStyle = col['--accent']; ctx.lineWidth = 2.4; ctx.beginPath();
+    for (var i = 0; i <= upto; i++) { var q = P(path[i]); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); }
+    ctx.stroke();
+    // robot + scan ring
+    var cur = path[upto], nxt = path[Math.min(upto + 1, path.length - 1)], prv = path[Math.max(upto - 1, 0)];
+    var th = Math.atan2(nxt[1] - prv[1], nxt[0] - prv[0]);
+    var r = P(cur);
+    ctx.strokeStyle = col['--accent']; ctx.globalAlpha = 0.25; ctx.beginPath(); ctx.arc(r[0], r[1], 3 * scale, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+    ctx.save(); ctx.translate(r[0], r[1]); ctx.rotate(-th);
+    ctx.fillStyle = col['--ink']; ctx.fillRect(-14, -10, 28, 20);
+    ctx.fillStyle = col['--accent']; ctx.beginPath(); ctx.moveTo(18, 0); ctx.lineTo(8, -6); ctx.lineTo(8, 6); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    if (poseEl) poseEl.textContent = 'x ' + cur[0].toFixed(2) + '  y ' + cur[1].toFixed(2) + '  θ ' + (th * 180 / Math.PI).toFixed(1) + '°';
+  }
+
+  readColors();
+  var idx = Math.floor(path.length * 0.62);
+  draw(idx);
+
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function refresh() { readColors(); draw(idx); }
+  if (mq && mq.addEventListener) mq.addEventListener('change', refresh);
+  new MutationObserver(refresh).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  if (reduce) return;
+  var last = 0;
+  function tick(ts) {
+    if (ts - last > 60) { idx = (idx + 1) % path.length; draw(idx); last = ts; }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
