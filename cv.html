@@ -63,7 +63,7 @@ b { font-weight: 600; }
 </header>
 
 <h2>Profile</h2>
-<p>Robotics engineer and technical lead with a PhD in long-term LiDAR localization and 6+ years building autonomy for robots that work without reliable GPS. I designed and wrote, on my own, a production LiDAR-inertial odometry system (GTSAM factor graph, C++17). I also lead the ROS&nbsp;2 navigation stack it runs in, deployed across three robot platforms in agricultural field trials. Five first-author papers (IEEE RA-L, Robotics and Autonomous Systems, ECMR, IAS, TAROS). At JABAS.AI I am taking GPS-free navigation from research into on-farm trials with commercial growers.</p>
+<p>Robotics engineer and technical lead with a PhD in long-term LiDAR localization and 6+ years building autonomy for robots that work without reliable GPS. Designed and built a production LiDAR-inertial odometry system from scratch (GTSAM factor graph, C++17), and leads the ROS&nbsp;2 navigation stack it runs in, deployed across three robot platforms in agricultural field trials. Five first-author papers (IEEE RA-L, Robotics and Autonomous Systems, ECMR, IAS, TAROS). Current work at JABAS.AI takes GPS-free navigation from research into on-farm trials with commercial growers.</p>
 
 <div class="highlights">
   <div><strong>7.9 cm</strong><span>LIO RMSE over 4,800 field scans, 3× real-time</span></div>
@@ -76,7 +76,7 @@ b { font-weight: 600; }
 
 <div class="role">
   <div class="role-head"><h3>Head of Autonomy <span>· JABAS.AI (University of Lincoln / Ceres Agri-Tech spin-out), Lincoln</span></h3><span class="when">2025 – Present</span></div>
-  <p class="sub">Technical owner of localization and navigation for a GPS-free autonomy-as-a-service platform for agricultural robot fleets.</p>
+  <p class="sub">Technical lead for localization and navigation for a GPS-free autonomy-as-a-service platform for agricultural robot fleets.</p>
   <ul>
     <li><b>Built <span class="pkg">jabas_lio</span> from scratch</b>, a tightly coupled LiDAR-inertial odometry system: GTSAM fixed-lag smoother (iSAM2), IMU preintegration with bias feedback, per-point deskewing, voxel map with incremental normals, and point-to-plane matching. Reached <b>7.9 cm RMSE over 4,800 field scans</b>, <b>8.3 mm stationary error</b>, and <b>30–65 ms per frame</b> against a 100 ms budget.</li>
     <li>Designed <b>custom GTSAM factors</b> for wheel-odometry and command-velocity priors. Their weights adapt to LiDAR observability, which keeps odometry stable in degenerate crop-row and tunnel geometry. Profile tuning <b>cut CPU 21%</b> for +5 mm RMSE.</li>

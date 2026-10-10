@@ -160,6 +160,8 @@ section { padding-block: 64px 8px; }
 .contact dl { margin: 0; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 10px 16px; font-size: 0.95rem; }
 .contact dt { font: 500 0.78rem/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .contact dd { margin: 0; word-break: break-word; }
+.jabas-cta { display: grid; gap: 6px; padding: 16px 18px; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent-soft); }
+.jabas-cta p:not(.label) { color: var(--ink); }
 footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size: var(--step--1); color: var(--muted); }
 
 @media (max-width: 880px) {
@@ -206,7 +208,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
     <p class="label">Localization · SLAM · Field autonomy</p>
     <h1 id="name" style="margin-top:12px">Dr Ibrahim Hroob</h1>
     <p class="role">Head of Autonomy at <a href="https://jabas.ai/">JABAS.AI</a></p>
-    <p class="lede">I build the estimation and navigation software that lets robots work where GPS doesn't: under canopy, inside polytunnels, between crop rows. I wrote a tightly coupled LiDAR-inertial odometry system from scratch and lead the ROS&nbsp;2 autonomy stack it runs in. That stack runs on three robot platforms. My PhD and first-author papers in RA-L and RAS are on long-term 3D LiDAR localization in changing environments.</p>
+    <p class="lede">Estimation and navigation software for robots that work where GPS doesn't: under canopy, inside polytunnels, between crop rows. The work includes a tightly coupled LiDAR-inertial odometry system built from scratch and a ROS&nbsp;2 autonomy stack that runs on three robot platforms. It builds on a PhD and first-author papers in RA-L and RAS on long-term 3D LiDAR localization in changing environments.</p>
     <div class="cta">
       <a class="btn primary" href="cv.pdf">Download CV (PDF)</a>
       <a class="btn" href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar</a>
@@ -223,15 +225,15 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
 <div class="facts" role="list">
   <div role="listitem"><b>5</b><span>first-author papers (RA-L, RAS, ECMR, IAS, TAROS)</span></div>
   <div role="listitem"><b>160+</b><span>citations · h-index 7</span></div>
-  <div role="listitem"><b>3</b><span>robot platforms running my navigation stack</span></div>
+  <div role="listitem"><b>3</b><span>robot platforms running the navigation stack</span></div>
   <div role="listitem"><b>7.9&nbsp;cm</b><span>LIO position RMSE over 4,800 field scans</span></div>
   <div role="listitem"><b>8</b><span>ROS&nbsp;2 packages authored or led in production</span></div>
 </div>
 
 <section aria-labelledby="strengths-h">
   <div class="sec-head">
-    <p class="label">What I do</p>
-    <h2 id="strengths-h">I own robot autonomy from sensor timestamp to farm deployment</h2>
+    <p class="label">Focus areas</p>
+    <h2 id="strengths-h">Robot autonomy from sensor timestamp to farm deployment</h2>
   </div>
   <div class="strengths">
     <article>
@@ -246,7 +248,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
     </article>
     <article>
       <h3>Research to field</h3>
-      <p>I take a method from paper to a robot that runs all day. I measure it on real logs and keep the benchmark honest about coverage, CPU and failure modes.</p>
+      <p>Methods go from paper to a robot that runs all day. They are measured on real logs, with benchmarks that report coverage, CPU and failure modes alongside accuracy.</p>
       <ul><li>Reproducible bag-replay evaluation</li><li>Sim-to-real: custom Gazebo sensor plugins</li><li>Debugging drift and frame issues on hardware</li></ul>
     </article>
   </div>
@@ -256,14 +258,14 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
   <div class="sec-head">
     <p class="label">Production work · JABAS.AI navigation stack</p>
     <h2 id="work-h">A GPS-free navigation stack for agricultural robot fleets</h2>
-    <p>JABAS.AI spun out of the University of Lincoln and Ceres Agri-Tech in 2026 to provide autonomy-as-a-service for farm robots, and I lead its autonomy work. The problem is real and close to home. On soft-fruit farms, up to a fifth of the work is moving trays of picked fruit, often under polytunnel plastic where GPS can't be trusted. Our stack lets robots from different manufacturers do that job without GPS. It runs on the AgileX Hunter, Dynium Gophar and Dogtooth platforms from one codebase, in simulation and on hardware, and is in on-farm trials with commercial growers.</p>
-    <p>The part I enjoy most is the loop between a derivation on the whiteboard and a robot driving a real polytunnel row, with the field logs showing what to improve next.</p>
+    <p>JABAS.AI spun out of the University of Lincoln and Ceres Agri-Tech in 2026 to provide autonomy-as-a-service for farm robots. The problem is real and close to home. On soft-fruit farms, up to a fifth of the work is moving trays of picked fruit, often under polytunnel plastic where GPS can't be trusted. Our stack lets robots from different manufacturers do that job without GPS. It runs on the AgileX Hunter, Dynium Gophar and Dogtooth platforms from one codebase, in simulation and on hardware, and is in on-farm trials with commercial growers.</p>
+    <p>The most rewarding part of the work is the short loop between a derivation on the whiteboard and a robot driving a real polytunnel row, with the field logs showing what to improve next.</p>
   </div>
 
   <article class="feature" aria-labelledby="lio-h">
     <div class="feature-head">
       <h3 id="lio-h" class="mono" style="font-family:var(--font-mono);font-size:1.4rem">jabas_lio</h3>
-      <span class="tag">Sole author · written from scratch</span>
+      <span class="tag">Written from scratch</span>
     </div>
     <div class="feature-body">
       <div>
@@ -330,12 +332,12 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
   <div class="ledger" style="margin-top:28px">
     <article class="pkg">
       <div class="pkg-head"><h3>nav2_costmap_row_controller</h3><span class="tag">Author</span></div>
-      <p>A Nav2 controller plugin for Ackermann robots in polytunnel rows. It finds the row boundaries in the costmap or point cloud, infers corridor width on its own, and keeps going when it can only see one side. It travels the exact planned distance even when localization drifts. I validated it with a deterministic harness that ran the real Nav2 costmap code: 18 runs and 6,338 control cycles.</p>
+      <p>A Nav2 controller plugin for Ackermann robots in polytunnel rows. It finds the row boundaries in the costmap or point cloud, infers corridor width on its own, and keeps going when it can only see one side. It travels the exact planned distance even when localization drifts. Validated with a deterministic harness that runs the real Nav2 costmap code: 18 runs and 6,338 control cycles.</p>
       <p class="stack">C++ · Nav2 plugin API · costmap_2d · GitHub Actions CI</p>
     </article>
     <article class="pkg">
       <div class="pkg-head"><h3>nav2_mppi_controller</h3><span class="tag">Lead</span></div>
-      <p>I backported Nav2's latest MPPI controller into the stack and added a four-wheel-steering motion model for the Gophar platform, with tests. I also built "MPPI Control Room", a web UI for live telemetry, velocity monitoring and critic tuning on the robot.</p>
+      <p>Nav2's latest MPPI controller, backported into the stack with a new four-wheel-steering motion model for the Gophar platform, with tests. It includes "MPPI Control Room", a web UI for live telemetry, velocity monitoring and critic tuning on the robot.</p>
       <p class="stack">C++ · xtensor · MPPI · JavaScript</p>
     </article>
     <article class="pkg">
@@ -345,7 +347,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
     </article>
     <article class="pkg">
       <div class="pkg-head"><h3>topological_navigation</h3><span class="tag alt">Core contributor</span></div>
-      <p>Contributor to <a href="https://github.com/LCAS/topological_navigation">LCAS's open-source topological planner</a>, which has 1,700+ commits. I worked on the ROS&nbsp;2 port and added per-route-segment metric maps and occupancy-grid publishing. Edge actions can now set ROS&nbsp;2 parameters on any node, and I wrote topomap editing and image-export tools.</p>
+      <p>Contributor to <a href="https://github.com/LCAS/topological_navigation">LCAS's open-source topological planner</a>, which has 1,700+ commits. Contributions include the ROS&nbsp;2 port, per-route-segment metric maps, occupancy-grid publishing, edge actions that set ROS&nbsp;2 parameters on any node, and topomap editing and image-export tools.</p>
       <p class="stack">Python · ROS&nbsp;2 actions · Nav2</p>
     </article>
     <article class="pkg">
@@ -369,13 +371,18 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
       <p class="stack">C++ · Kalman filtering · data association</p>
     </article>
   </div>
+  <div class="jabas-cta" style="margin-top:28px">
+    <p class="label">Work with JABAS.AI</p>
+    <p><b>Want your robot to move autonomously?</b> JABAS.AI brings GPS-free navigation to robots from different manufacturers. Contact the team to talk about your platform.</p>
+    <p class="mono"><a href="mailto:info@jabas.ai">info@jabas.ai</a> · <a href="mailto:ibrahim@jabas.ai">ibrahim@jabas.ai</a></p>
+  </div>
 </section>
 
 <section id="research" aria-labelledby="research-h">
   <div class="sec-head">
     <p class="label">Research · first author</p>
     <h2 id="research-h">Which parts of a changing world can a robot trust?</h2>
-    <p>My PhD asked which LiDAR points stay stable over weeks and seasons, and how to learn that without manual labels. The result is a family of self-supervised point-stability filters that make scan-to-map localization robust in dynamic environments.</p>
+    <p>The PhD research asked which LiDAR points stay stable over weeks and seasons, and how to learn that without manual labels. The result is a family of self-supervised point-stability filters that make scan-to-map localization robust in dynamic environments.</p>
   </div>
   <div class="papers">
     <article class="paper">
@@ -447,7 +454,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
       <p class="when">2025 – now</p>
       <div class="body">
         <h3>Head of Autonomy <small>· JABAS.AI, Lincoln</small></h3>
-        <p>Technical lead for localization and navigation at a University of Lincoln and Ceres Agri-Tech spin-out. I own the LIO, the controllers and the stack architecture, and support on-farm trials with commercial growers.</p>
+        <p>Technical lead for localization and navigation at a University of Lincoln and Ceres Agri-Tech spin-out. Work covers the LIO, the controllers and the stack architecture, plus support for on-farm trials with commercial growers.</p>
       </div>
     </article>
     <article class="job">
@@ -492,13 +499,19 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
   <div class="sec-head" style="margin:0">
     <p class="label">Contact</p>
     <h2 id="contact-h">Get in touch</h2>
-    <p>I'm happy to talk about LiDAR-inertial odometry, long-term localization, field robotics, or working with JABAS.AI on autonomy for your robots.</p>
+    <p>For research, talks or questions about LiDAR-inertial odometry, long-term localization and field robotics.</p>
+    <div class="jabas-cta" style="margin-top:20px">
+      <p class="label">Robot autonomy</p>
+      <p><b>Want your robot to drive itself?</b> To make your robot move autonomously, contact the JABAS.AI team.</p>
+      <p class="mono"><a href="mailto:info@jabas.ai">info@jabas.ai</a> · <a href="mailto:ibrahim@jabas.ai">ibrahim@jabas.ai</a></p>
+    </div>
   </div>
   <dl>
     <dt>Email</dt><dd><a href="mailto:ibrahim.hroub7@gmail.com">ibrahim.hroub7@gmail.com</a></dd>
     <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ibrahim-hroob/">in/ibrahim-hroob</a></dd>
     <dt>GitHub</dt><dd><a href="https://github.com/ibrahimhroob">ibrahimhroob</a></dd>
     <dt>Scholar</dt><dd><a href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar profile</a></dd>
+    <dt>JABAS.AI</dt><dd><a href="mailto:info@jabas.ai">info@jabas.ai</a><br><a href="mailto:ibrahim@jabas.ai">ibrahim@jabas.ai</a></dd>
     <dt>Based</dt><dd>Lincoln, UK</dd>
   </dl>
 </section>
