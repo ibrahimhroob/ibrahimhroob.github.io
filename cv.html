@@ -23,7 +23,9 @@ p { margin: 0; }
 ul { margin: 2px 0 0; padding-left: 13px; }
 li { margin: 1.5px 0; }
 li::marker { color: var(--muted); }
-.role { margin-top: 7px; break-inside: avoid; }
+.role { margin-top: 7px; }
+.role-head, .sub { break-after: avoid; }
+li { break-inside: avoid; }
 .role-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .role-head h3 { font-size: 10pt; font-weight: 700; }
 .role-head h3 span { font-weight: 500; color: var(--muted); }
@@ -66,7 +68,7 @@ b { font-weight: 600; }
 <p>Robotics engineer and technical lead with a PhD in long-term LiDAR localization and 6+ years building autonomy for robots that work without reliable GPS. Built a production LiDAR-inertial odometry system (GTSAM factor graph, C++17) on a KISS-ICP baseline, and leads the ROS&nbsp;2 navigation stack it runs in, deployed across three robot platforms in agricultural field trials. Five first-author papers (IEEE RA-L, Robotics and Autonomous Systems, ECMR, IAS, TAROS). Current work at JABAS.AI takes GPS-free navigation from research into on-farm trials with commercial growers.</p>
 
 <div class="highlights">
-  <div><strong>7.9 cm</strong><span>LIO RMSE over 4,800 field scans, 3× real-time</span></div>
+  <div><strong>3.0 cm</strong><span>LIO error vs RTK GNSS over a 172 m drive</span></div>
   <div><strong>8</strong><span>production ROS&nbsp;2 packages authored or led</span></div>
   <div><strong>3</strong><span>robot platforms on one stack, real and sim</span></div>
   <div><strong>160+</strong><span>citations · h-index 7 · 5 first-author papers</span></div>
@@ -78,8 +80,9 @@ b { font-weight: 600; }
   <div class="role-head"><h3>Head of Autonomy <span>· JABAS.AI (University of Lincoln / Ceres Agri-Tech spin-out), Lincoln</span></h3><span class="when">2025 – Present</span></div>
   <p class="sub">Technical lead for localization and navigation for a GPS-free autonomy-as-a-service platform for agricultural robot fleets.</p>
   <ul>
-    <li><b>Built <span class="pkg">jabas_lio</span></b>, a tightly coupled LiDAR-inertial odometry system extended from a KISS-ICP baseline: GTSAM fixed-lag smoother (iSAM2), IMU preintegration with bias feedback, per-point deskewing, voxel map with incremental normals, and point-to-plane matching. Reached <b>7.9 cm RMSE over 4,800 field scans</b>, <b>8.3 mm stationary error</b>, and <b>30–65 ms per frame</b> against a 100 ms budget.</li>
-    <li>Designed <b>custom GTSAM factors</b> for wheel-odometry and command-velocity priors. Their weights adapt to LiDAR observability, which keeps odometry stable in degenerate crop-row and tunnel geometry. Profile tuning <b>cut CPU 21%</b> for +5 mm RMSE.</li>
+    <li><b>Built <span class="pkg">jabas_lio</span></b>, a tightly coupled LiDAR-inertial odometry system extended from a KISS-ICP baseline: GTSAM fixed-lag smoother (iSAM2), IMU preintegration with bias feedback, per-point deskewing, voxel map with incremental normals, and point-to-plane matching. Scored against RTK GNSS: <b>3.0 cm ATE</b> over a 172 m drive, 0.35% drift per 10 m, 0.30° heading RMS, and <b>4.3 mm</b> maximum deviation over 50 min parked.</li>
+    <li>Designed <b>custom GTSAM factors</b> for wheel-odometry and command-velocity priors. Their weights adapt to LiDAR observability, which keeps odometry stable in degenerate crop-row and tunnel geometry.</li>
+    <li>Fixed a long-uptime slowdown (10 Hz → 0.9 Hz over a 20.8 h field run) caused by unreused iSAM2 factor slots and three smaller costs. Per-frame time is now flat at 2.9 ms (was 42.8 ms and rising), memory fell from 317 to 43 MB, and robot CPU is a flat 10.6% of a core, with identical poses. Added latency and frame-gap watchdogs.</li>
     <li>Wrote <span class="pkg">nav2_costmap_row_controller</span>, a Nav2 plugin for Ackermann in-row driving. It detects boundaries from the costmap or point cloud, infers corridor width on its own, and keeps exact path distance even when localization degrades. Validated over 18 runs and 6,338 control cycles in a deterministic harness, with CI.</li>
     <li>Backported Nav2's latest <b>MPPI controller</b> and added a <b>four-wheel-steering motion model</b> with tests. Built a web "Control Room" for live telemetry and on-robot critic tuning.</li>
     <li>Architected <span class="pkg">navstack_bringup</span>: one codebase covering GNSS/EKF fusion, LIO, point-cloud preprocessing, Nav2, topological navigation and safety guards. It runs on <b>AgileX Hunter, Dynium Gophar and Dogtooth</b>, real and simulated, with Docker devcontainers.</li>

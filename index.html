@@ -226,7 +226,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
   <div role="listitem"><b>5</b><span>first-author papers (RA-L, RAS, ECMR, IAS, TAROS)</span></div>
   <div role="listitem"><b>160+</b><span>citations · h-index 7</span></div>
   <div role="listitem"><b>3</b><span>robot platforms running the navigation stack</span></div>
-  <div role="listitem"><b>7.9&nbsp;cm</b><span>LIO position RMSE over 4,800 field scans</span></div>
+  <div role="listitem"><b>3.0&nbsp;cm</b><span>LIO error vs RTK GNSS over a 172 m drive</span></div>
   <div role="listitem"><b>8</b><span>ROS&nbsp;2 packages authored or led in production</span></div>
 </div>
 
@@ -274,16 +274,17 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
           <li>GTSAM <span class="mono">IncrementalFixedLagSmoother</span> (iSAM2) with <span class="mono">CombinedImuFactor</span> and bias feedback into preintegration</li>
           <li>Per-point IMU deskewing, voxel map with incremental PCA normals, robust point-to-plane matching</li>
           <li>Custom GTSAM factors for wheel-odometry and command-velocity motion priors. Their weights adapt to LiDAR observability.</li>
-          <li>Frame-health gating, stationary locking, published covariances, and a GPS fusion node</li>
-          <li>Synthetic LiDAR/IMU generator for hardware-free tests; replay and benchmark tooling</li>
+          <li>Frame-health gating, latency and frame-gap watchdogs with supervised restart, stationary locking, published covariances, and a GPS fusion node</li>
+          <li>Synthetic LiDAR/IMU generator for hardware-free tests, and a deterministic replay harness scored against RTK GNSS</li>
+          <li>Long-uptime fix: a 20.8 h field run had slowed from 10 Hz to 0.9 Hz. The causes were unreused iSAM2 factor slots and three smaller costs. Per-frame time is now flat, with identical poses.</li>
         </ul>
         <p class="stack">C++17 · Python · GTSAM · Eigen · ROS&nbsp;2 · 12 test suites</p>
       </div>
       <div class="metrics" aria-label="Validation results">
-        <div><b>7.9 cm</b><span>aligned position RMSE over 4,800 field scans (8 min), GPS used only as reference</span></div>
-        <div><b>8.3 mm</b><span>max error while stationary over 20 s, with zero false path length</span></div>
-        <div><b>30–65 ms</b><span>per-frame cost inside a 100 ms budget, so it holds 3× real-time replay</span></div>
-        <div><b>−21%</b><span>CPU from profile tuning for +5 mm RMSE, measured over the full bag</span></div>
+        <div><b>3.0 cm</b><span>ATE RMS against RTK GNSS over a 172 m drive, with 0.35% drift per 10 m and 0.30° heading RMS</span></div>
+        <div><b>4.3 mm</b><span>maximum pose deviation over 50 minutes parked</span></div>
+        <div><b>2.9 ms</b><span>flat per-frame cost over 50 min of uptime, down from 42.8 ms and rising</span></div>
+        <div><b>10.6%</b><span>of one CPU core on the robot, flat over time (was up to 118%)</span></div>
       </div>
     </div>
     <div class="pipeline" aria-label="Estimator pipeline">
