@@ -208,7 +208,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
     <p class="label">Localization · SLAM · Field autonomy</p>
     <h1 id="name" style="margin-top:12px">Dr Ibrahim Hroob</h1>
     <p class="role">Head of Autonomy at <a href="https://jabas.ai/">JABAS.AI</a></p>
-    <p class="lede">Estimation and navigation software for robots that work where GPS doesn't: under canopy, inside polytunnels, between crop rows. The work includes a tightly coupled LiDAR-inertial odometry system built from scratch and a ROS&nbsp;2 autonomy stack that runs on three robot platforms. It builds on a PhD and first-author papers in RA-L and RAS on long-term 3D LiDAR localization in changing environments.</p>
+    <p class="lede">Estimation and navigation software for robots that work where GPS doesn't: under canopy, inside polytunnels, between crop rows. The work includes a tightly coupled LiDAR-inertial odometry system extended from a KISS-ICP baseline and a ROS&nbsp;2 autonomy stack that runs on three robot platforms. It builds on a PhD and first-author papers in RA-L and RAS on long-term 3D LiDAR localization in changing environments.</p>
     <div class="cta">
       <a class="btn primary" href="cv.pdf">Download CV (PDF)</a>
       <a class="btn" href="https://scholar.google.com/citations?user=4OmelOUAAAAJ&amp;hl=en">Google Scholar</a>
@@ -265,11 +265,11 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
   <article class="feature" aria-labelledby="lio-h">
     <div class="feature-head">
       <h3 id="lio-h" class="mono" style="font-family:var(--font-mono);font-size:1.4rem">jabas_lio</h3>
-      <span class="tag">Written from scratch</span>
+      <span class="tag">Author · KISS-ICP baseline</span>
     </div>
     <div class="feature-body">
       <div>
-        <p>Tightly coupled LiDAR-inertial odometry for ROS&nbsp;2. A sliding-window factor graph fuses 200&nbsp;Hz IMU with 10&nbsp;Hz Livox Mid-360 scans and estimates pose, velocity and IMU bias jointly. It was built for crop rows and tunnels, where the geometry is repetitive and scan matching alone degenerates.</p>
+        <p>Tightly coupled LiDAR-inertial odometry for ROS&nbsp;2. It started from a KISS-ICP baseline and was extended with IMU integration, point-to-plane optimization and a factor-graph back end. A sliding-window factor graph fuses 200&nbsp;Hz IMU with 10&nbsp;Hz Livox Mid-360 scans and estimates pose, velocity and IMU bias jointly. It was built for crop rows and tunnels, where the geometry is repetitive and scan matching alone degenerates.</p>
         <ul>
           <li>GTSAM <span class="mono">IncrementalFixedLagSmoother</span> (iSAM2) with <span class="mono">CombinedImuFactor</span> and bias feedback into preintegration</li>
           <li>Per-point IMU deskewing, voxel map with incremental PCA normals, robust point-to-plane matching</li>
@@ -277,7 +277,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 20px 32px; font-size:
           <li>Frame-health gating, stationary locking, published covariances, and a GPS fusion node</li>
           <li>Synthetic LiDAR/IMU generator for hardware-free tests; replay and benchmark tooling</li>
         </ul>
-        <p class="stack">C++17 · Python · GTSAM · Eigen · ROS&nbsp;2 · ~9.6k lines · 12 test suites</p>
+        <p class="stack">C++17 · Python · GTSAM · Eigen · ROS&nbsp;2 · 12 test suites</p>
       </div>
       <div class="metrics" aria-label="Validation results">
         <div><b>7.9 cm</b><span>aligned position RMSE over 4,800 field scans (8 min), GPS used only as reference</span></div>
